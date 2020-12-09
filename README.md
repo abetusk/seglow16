@@ -10,13 +10,15 @@ seglow16
 A 16 segment digit (base board) using WS2812B/SK6812 5050 parts.
 Size should be about 5.2"x3.9" (132mmx100mm).
 
-Currently this project is **semitested**.
-
 Made with [MeowCAD](https://meowcad.com/project?projectId=4983569d-bf97-47ea-8737-0bbebbcf3797).
 
 | | |
 |---|---|
 | ![sch](img/seg16-sch.png) | ![brd](img/seg16-brd.png) |
+
+The current version is located in `export_v0.1.1`.
+
+A skinnier version of the digit is located in `export_v0.2.0` but this hasn't been tested.
 
 ---
 
