@@ -26,6 +26,15 @@ The order of the LEDs is given by the following diagram:
 
 ![seg6 LED order](img/seg16-LED-order.png)
 
+Gerbers
+---
+
+The current version is located in the [export_v0.1.1](https://github.com/abetusk/seglow16/blob/main/export_v0.1.1/gerber/seg16_v0.1.1.zip)
+directory.
+
+If you would like to use JLCPCB's service to fab boards, the BOM and CPL file are located in
+the [`aux` directory](https://github.com/abetusk/seglow16/blob/main/aux/jlcpcb).
+
 License
 ---
 
