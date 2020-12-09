@@ -6,7 +6,6 @@ seglow16
 
 ![seg16 board](img/seg16_assembled.1.jpg)
 
-
 A 16 segment digit (base board) using WS2812B/SK6812 5050 parts.
 Size should be about 5.2"x3.9" (132mmx100mm).
 
@@ -26,14 +25,19 @@ The order of the LEDs is given by the following diagram:
 
 ![seg6 LED order](img/seg16-LED-order.png)
 
-Gerbers
+---
+
+For creating dividers for separating the segments or for creating the digit masks,
+the SVG files can be used, located in the [`aux/` directory](https://github.com/abetusk/seglow16/blob/main/aux).
+
+Fabrication
 ---
 
 The current version is located in the [export_v0.1.1](https://github.com/abetusk/seglow16/blob/main/export_v0.1.1/gerber/seg16_v0.1.1.zip)
 directory.
 
 If you would like to use JLCPCB's service to fab boards, the BOM and CPL file are located in
-the [`aux` directory](https://github.com/abetusk/seglow16/blob/main/aux/jlcpcb).
+the [`aux/jlcpcb` directory](https://github.com/abetusk/seglow16/blob/main/aux/jlcpcb).
 
 License
 ---
