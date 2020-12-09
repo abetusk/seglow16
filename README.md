@@ -9,6 +9,15 @@ seglow16
 A 16 segment digit (base board) using WS2812B/SK6812 5050 parts.
 Size should be about 5.2"x3.9" (132mmx100mm).
 
+The segments can be chained, just like a normal WS2812b strip,
+and each board has separate power and signal lines to facilitate
+ease of driving multiple digits chained together.
+
+A small example script to "drive" the digits is located in the
+[`src/` directory](https://github.com/abetusk/seglow16/blob/main/src/seglow16-example.ino).
+
+---
+
 Made with [MeowCAD](https://meowcad.com/project?projectId=4983569d-bf97-47ea-8737-0bbebbcf3797).
 
 | | |
