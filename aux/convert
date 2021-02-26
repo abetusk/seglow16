@@ -1,0 +1,58 @@
+#!/bin/bash
+
+mkdir -p scad
+
+###
+
+svgpath2gp --segment 0.0125 --combine --error 0.01  <( xmltojson < seg16-layers.svg  | jq .svg.g[0] | grep '"d"' | cut -f2- -d':' | sed 's/^ *"//' | sed 's/", *$//' )  | \
+  tr '\n' Z | \
+  sed 's/ /,/g' | \
+  sed 's/^/mini_poly = [[[/'  | \
+  sed 's/ZZ$/]]];/' |  \
+  sed 's/ZZ/]],\n[[/g' | \
+  sed 's/Z/],[/g' > inner_segment.scad
+echo >> scad/inner_segment.scad
+
+###
+
+svgpath2gp --combine  --segment 0.01  <( xmltojson < seg16-layers.svg  | jq -c -r .svg.g[2].path.d ) | \
+  grep -v -P '^$' | \
+  tr '\n' Z  | \
+  sed 's/Z*$//' | \
+  sed 's/ /,/g' | \
+  sed 's/^/brdr = [[/' | \
+  sed 's/$/]];/' | \
+  sed 's/Z/],\n[/g'  > scad/border.scad
+
+###
+
+echo 'screw_hole = [' > scad/screw_hole.scad
+for x in `seq 0 3` ; do
+
+  xpp=`echo "$x+1" | bc`
+
+  if [[ "$x" != 0 ]]  ; then
+    echo "," >> scad/screw_hole.scad
+  fi
+  svgpath2gp --segment 1 --error 0.01 --combine <( xmltojson < seg16-layers.svg | jq -r -c .svg.g[1].path[].d | head -n $xpp | tail -n1  ) | \
+    tr '\n' Z | \
+    sed 's/Z*$//' | \
+    sed 's/ZZ*/Z/g' | \
+    sed 's/^/[[/' | \
+    sed 's/$/]]/' | \
+    sed 's/Z/],\n[/g' | \
+    sed 's/ /,/g'  >> scad/screw_hole.scad
+
+done
+echo "];" >> scad/screw_hole.scad
+
+###
+
+grep -P 'U|a0' jlcpcb/seglow16_cpl.csv | \
+  cut -f 2,3 -d',' | \
+  sed 's/mm//g' | \
+  tr '\n' Z | \
+  sed 's/ZZ*$//' | \
+  sed 's/^/led_pos = [[/' | \
+  sed 's/$/]];/'  | \
+  sed 's/Z/],\n[/g' > scad/led_pos.scad
